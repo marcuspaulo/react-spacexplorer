@@ -22,7 +22,7 @@ export default function Search() {
         });
     }
 
-    if (isError) {
+    if (isError || data === undefined) {
         return <ErrorComponent errorMessage={error} />;
     }
 
