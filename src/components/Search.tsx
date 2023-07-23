@@ -80,12 +80,7 @@ export default function Search() {
                     {data?.collection?.items.map((item, index) => {
                         return (
                             <div key={index}>
-                                <CardItem
-                                    item={item}
-                                    href={''}
-                                    data={[]}
-                                    links={[]}
-                                />
+                                <CardItem item={item} />
                             </div>
                         );
                     })}

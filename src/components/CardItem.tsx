@@ -33,9 +33,13 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
     }),
 }));
 
-export default function CardItem({ item }: Item) {
-    const dataItem = item?.item.data[0];
-    const dataImage = item?.item;
+interface ItemProps {
+    item: Item;
+}
+
+export default function CardItem({ item }: ItemProps) {
+    const dataItem = item?.data[0];
+    const dataImage = item;
 
     const [expanded, setExpanded] = useState(false);
 
@@ -94,7 +98,6 @@ export default function CardItem({ item }: Item) {
                     {dataImage?.links[0].href ? (
                         <CardMedia
                             component="img"
-                            // height="400"
                             sx={{
                                 minWidth: {
                                     xs: 300,

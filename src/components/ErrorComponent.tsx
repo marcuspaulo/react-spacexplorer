@@ -10,8 +10,8 @@ export default function Error({ errorMessage }: ErrorProps) {
     return (
         <div>
             <ErrorOutlineIcon />
-            <h1>{errorMessage}</h1>
-            {errorMessage && <p>{errorMessage}</p>}
+            {/* <h1>{errorMessage}</h1> */}
+            {/* {errorMessage && <p>{errorMessage}</p>} */}
         </div>
     );
 }
