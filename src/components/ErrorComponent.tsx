@@ -6,7 +6,7 @@ interface ErrorProps {
 }
 
 export default function Error({ errorMessage }: ErrorProps) {
-    console.error('Error: ', errorMessage);
+    // console.error('Error: ', errorMessage);
     return (
         <div>
             <ErrorOutlineIcon />

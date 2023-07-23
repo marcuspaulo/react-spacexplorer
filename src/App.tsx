@@ -24,7 +24,7 @@ function MyApp() {
 
     return (
         <>
-            {theme.palette.mode} mode
+            {/* {theme.palette.mode} mode */}
             <QueryClientProvider client={queryClient}>
                 <Box
                     sx={{
@@ -77,7 +77,14 @@ function MyApp() {
 }
 
 export default function ToggleColorMode() {
-    const [mode, setMode] = useState<'light' | 'dark'>('light');
+    const [mode, setMode] = useState<'light' | 'dark'>(
+        () => (localStorage.getItem('theme') as 'light' | 'dark') || 'light'
+    );
+
+    useEffect(() => {
+        localStorage.setItem('theme', mode);
+    }, [mode]);
+
     const colorMode = useMemo(
         () => ({
             toggleColorMode: () => {
