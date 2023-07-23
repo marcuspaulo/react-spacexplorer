@@ -1,10 +1,11 @@
-import { Theme } from '@emotion/react';
-import { Box, Typography } from '@mui/material';
+import { Box, Theme, Typography } from '@mui/material';
 
-// interface FooterProps {
-//     theme: Theme;
-// }
-export default function Footer(theme: Theme) {
+interface FooterProps {
+    theme: Theme;
+}
+
+// export default function Footer({ theme }: FooterProps) {
+export default function Footer({ theme }: FooterProps) {
     return (
         <>
             <Box

@@ -33,7 +33,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
     }),
 }));
 
-export default function CardItem(item: Item) {
+export default function CardItem({ item }: Item) {
     const dataItem = item?.item.data[0];
     const dataImage = item?.item;
 

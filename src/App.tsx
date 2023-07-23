@@ -68,7 +68,7 @@ function MyApp() {
                     </AppBar>
                     <Search />
                     {/* <Content /> */}
-                    <Footer theme />
+                    <Footer theme={theme} />
                 </Box>
                 <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>

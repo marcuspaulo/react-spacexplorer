@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Base } from '../models/interfaces';
-import Loading from './Loading';
-import Error from './Error';
 import CardItem from './CardItem';
 import { Box } from '@mui/material';
+import ErrorComponent from './ErrorComponent';
+import Loading from './Loading';
 
 export default function Search() {
-    const { status, data, error } = useSearch();
+    const { data, isLoading, isError, error } = useSearch();
     const baseUrl = import.meta.env.VITE_BASE_URL as string;
 
     function useSearch() {
@@ -22,25 +22,33 @@ export default function Search() {
         });
     }
 
-    const planets = [
-        { title: 'Earth' },
-        { title: 'Jupiter' },
-        { title: 'Mars' },
-        { title: 'Mercury' },
-        { title: 'Neptune' },
-        { title: 'Saturn' },
-        { title: 'Uranus' },
-        { title: 'Venus' },
-    ];
-
-    const defaultProps = {
-        options: planets,
-        getOptionLabel: (option: PlanetOptionType) => option.title,
-    };
-
-    interface PlanetOptionType {
-        title: string;
+    if (isError) {
+        return <ErrorComponent errorMessage={error} />;
     }
+
+    if (isLoading) {
+        return <Loading />;
+    }
+
+    // const planets = [
+    //     { title: 'Earth' },
+    //     { title: 'Jupiter' },
+    //     { title: 'Mars' },
+    //     { title: 'Mercury' },
+    //     { title: 'Neptune' },
+    //     { title: 'Saturn' },
+    //     { title: 'Uranus' },
+    //     { title: 'Venus' },
+    // ];
+
+    // const defaultProps = {
+    //     options: planets,
+    //     getOptionLabel: (option: PlanetOptionType) => option.title,
+    // };
+
+    // interface PlanetOptionType {
+    //     title: string;
+    // }
 
     return (
         <>
@@ -68,23 +76,16 @@ export default function Search() {
                     />
                 </div> */}
 
-                {error ? <p>An error occurred: {error?.message}</p> : ''}
-
-                {status === 'loading' ? (
-                    <Loading />
-                ) : status === 'error' ? (
-                    <span>
-                        <Error error />
-                        {error?.message}
-                    </span>
-                ) : (
-                    ''
-                )}
                 <section>
                     {data?.collection?.items.map((item, index) => {
                         return (
                             <div key={index}>
-                                <CardItem item={item} />
+                                <CardItem
+                                    item={item}
+                                    href={''}
+                                    data={[]}
+                                    links={[]}
+                                />
                             </div>
                         );
                     })}
