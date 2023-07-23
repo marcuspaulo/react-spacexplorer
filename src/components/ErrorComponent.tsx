@@ -1,9 +1,9 @@
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
 // Interface para as propriedades do componente Error
-interface ErrorProps {
-    errorMessage: any;
-}
+// interface ErrorProps {
+//     errorMessage: any;
+// }
 
 // export default function Error({ errorMessage }: ErrorProps) {
 export default function Error() {
