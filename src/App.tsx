@@ -18,13 +18,14 @@ function MyApp() {
     const queryClient = new QueryClient();
     const title = import.meta.env.VITE_TITLE as string;
 
+    console.log('ENV: ', import.meta.env.VITE_TITLE);
+
     useEffect(() => {
         document.title = title ? title : 'React Nasa';
     });
 
     return (
         <>
-            {/* {theme.palette.mode} mode */}
             <QueryClientProvider client={queryClient}>
                 <Box
                     sx={{

@@ -2,28 +2,51 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Base } from '../models/interfaces';
 import CardItem from './CardItem';
-import { Box } from '@mui/material';
+import { Box, TextField } from '@mui/material';
 import ErrorComponent from './ErrorComponent';
 import Loading from './Loading';
+import { useState } from 'react';
 
 export default function Search() {
-    const { data, isLoading, isError, error } = useSearch();
+    const [searchQuery, setSearchQuery] = useState('saturn');
+    const { data, isLoading, isError } = useSearch(searchQuery);
     const baseUrl = import.meta.env.VITE_BASE_URL as string;
+    const [inputValue, setInputValue] = useState('');
 
-    function useSearch() {
+    function useSearch(query: string) {
+        query ? query : undefined;
+        const queryParam = query ? query : 'earth';
         return useQuery({
-            queryKey: ['search'],
+            queryKey: ['search', query],
             queryFn: async () => {
                 const { data } = await axios.get<Base>(
-                    `${baseUrl}/search?q=saturn&page=2&page_size=5`
+                    `${baseUrl}/search?q=${queryParam}&page=2&page_size=5`
                 );
                 return data;
             },
         });
     }
 
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(event.target.value);
+    };
+
+    const handleInputKeyDown = (
+        event: React.KeyboardEvent<HTMLInputElement>
+    ) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            console.log('Tecla Enter pressionada!', inputValue);
+            handleSearch(inputValue);
+        }
+    };
+
+    const handleSearch = (query: string) => {
+        setSearchQuery(query);
+    };
+
     if (isError || data === undefined) {
-        return <ErrorComponent errorMessage={error} />;
+        return <ErrorComponent />;
     }
 
     if (isLoading) {
@@ -59,23 +82,40 @@ export default function Search() {
                     marginTop: '8%',
                 }}
             >
-                {/* <div>
-                    <Autocomplete
-                        sx={{ backgroundColor: 'white' }}
-                        {...defaultProps}
-                        id="auto-complete"
-                        autoComplete
-                        includeInputInList
-                        renderInput={(params) => (
-                            <TextField
-                                {...params}
-                                label="Enter your search here to learn about other planets"
-                                variant="standard"
-                            />
-                        )}
-                    />
-                </div> */}
-
+                <TextField
+                    sx={{ minWidth: '56%' }}
+                    label="Enter your search here to learn about other planets"
+                    variant="standard"
+                    focused
+                    value={inputValue}
+                    onKeyDown={handleInputKeyDown}
+                    onChange={handleInputChange}
+                />
+                {/* <Autocomplete
+                    sx={{ minWidth: '56%' }}
+                    {...defaultProps}
+                    id="auto-complete"
+                    autoComplete
+                    // includeInputInList
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            label="Enter your search here to learn about other planets"
+                            variant="standard"
+                            value={searchQuery}
+                            onKeyDown={handleInputKeyDown}
+                            onChange={handleInputChange}
+                        />
+                    )}
+                /> */}
+            </Box>
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginTop: '2%',
+                }}
+            >
                 <section>
                     {data?.collection?.items.map((item, index) => {
                         return (
