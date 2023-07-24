@@ -7,8 +7,9 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import Search from './components/Search';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { AppBar, Toolbar, Typography } from '@mui/material';
+import { AppBar, Container, Toolbar, Typography } from '@mui/material';
 import Footer from './pages/layout/Footer';
+import { RocketLaunch } from '@mui/icons-material';
 
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
@@ -40,18 +41,18 @@ function MyApp() {
                     <AppBar
                         position="fixed"
                         sx={{
-                            marginBottom: '10px',
-                            paddingBottom: '10px',
+                            marginBottom: '5px',
+                            paddingBottom: '5px',
                             backgroundColor: '#023567',
                         }}
                     >
                         <Toolbar>
                             <Typography
-                                variant="h6"
+                                variant="h5"
                                 component="div"
                                 sx={{ flexGrow: 1 }}
                             >
-                                SpaceXplorer
+                                <RocketLaunch /> {' | '} SpaceXplorer
                             </Typography>
 
                             <IconButton
@@ -67,9 +68,10 @@ function MyApp() {
                             </IconButton>
                         </Toolbar>
                     </AppBar>
-                    <Search />
-                    {/* <Content /> */}
-                    <Footer theme={theme} />
+                    <Container>
+                        <Search />
+                    </Container>
+                    <Footer apiVersion="1.0" />
                 </Box>
                 <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>

@@ -1,71 +1,43 @@
-import { Box, Theme, Typography } from '@mui/material';
+import { RocketLaunch } from '@mui/icons-material';
+import { Box, Typography } from '@mui/material';
 
 interface FooterProps {
-    theme: Theme;
+    apiVersion: string;
 }
 
-// export default function Footer({ theme }: FooterProps) {
-export default function Footer({ theme }: FooterProps) {
+export default function Footer({ apiVersion }: FooterProps) {
     return (
         <>
             <Box
                 sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    height: 56,
-                    padding: '16px 0',
-                    backgroundColor: theme?.palette?.background?.default,
-                    color: theme?.palette?.text?.primary,
+                    position: 'fixed',
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    py: 2,
+                    backgroundColor: '#033566',
+                    textAlign: 'center',
                 }}
             >
-                <Typography variant="caption" color="text.primary">
-                    Nasa API Version:
-                    {/* {data?.collection?.version}. More */}
-                    details:{' '}
-                    <a href="https://images.nasa.gov/docs/images.nasa.gov_api_docs.pdf">
-                        Nasa API Docs
+                <Typography variant="caption" color="#FFF">
+                    Nasa API Version:{' '}
+                    <a
+                        href="https://images.nasa.gov/docs/images.nasa.gov_api_docs.pdf"
+                        target="_blank"
+                        style={{
+                            color: '#FFF',
+                            textDecoration: 'underline',
+                            cursor: 'pointer',
+                        }}
+                    >
+                        {apiVersion}
                     </a>
+                    {'   '}
+                    {' | '} Develop by Marcus Melo
+                    {'   '}
+                    <RocketLaunch />
                 </Typography>
             </Box>
         </>
     );
 }
-
-// import React from 'react';
-// import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
-// import Footer from './Footer';
-
-// const lightTheme = createTheme({
-//     palette: {
-//         mode: 'light',
-//         primary: {
-//             main: '#808080', // Cinza para o light mode
-//         },
-//     },
-// });
-
-// const darkTheme = createTheme({
-//     palette: {
-//         mode: 'dark',
-//         primary: {
-//             main: '#1976d2', // Azul para o dark mode
-//         },
-//     },
-// });
-
-// function App() {
-//     const [isDarkMode, setIsDarkMode] = React.useState(false);
-
-//     const theme = isDarkMode ? darkTheme : lightTheme;
-
-//     return (
-//         <ThemeProvider theme={theme}>
-//             <CssBaseline />
-//             {/* Seu conteúdo aqui */}
-//             <Footer isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
-//         </ThemeProvider>
-//     );
-// }
-
-// export default App;
