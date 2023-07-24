@@ -37,7 +37,6 @@ export default function Search() {
     ) => {
         if (event.key === 'Enter') {
             event.preventDefault();
-            console.log('Tecla Enter pressionada!', inputValue);
             handleSearch(inputValue);
         }
     };
