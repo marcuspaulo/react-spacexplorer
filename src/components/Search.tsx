@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Base } from '../models/interfaces';
 import CardItem from './CardItem';
-import { Box, TextField, Typography } from '@mui/material';
+import { Alert, AlertTitle, Box, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import Loading from './Loading';
 
@@ -45,34 +45,6 @@ export default function Search() {
         setSearchQuery(query);
     };
 
-    // if (isError || data === undefined) {
-    //     return <ErrorComponent />;
-    // }
-
-    // if (isLoading) {
-    //     return <Loading />;
-    // }
-
-    // const planets = [
-    //     { title: 'Earth' },
-    //     { title: 'Jupiter' },
-    //     { title: 'Mars' },
-    //     { title: 'Mercury' },
-    //     { title: 'Neptune' },
-    //     { title: 'Saturn' },
-    //     { title: 'Uranus' },
-    //     { title: 'Venus' },
-    // ];
-
-    // const defaultProps = {
-    //     options: planets,
-    //     getOptionLabel: (option: PlanetOptionType) => option.title,
-    // };
-
-    // interface PlanetOptionType {
-    //     title: string;
-    // }
-
     return (
         <>
             <form
@@ -95,9 +67,13 @@ export default function Search() {
                     }}
                 >
                     <Typography
-                        variant="h6"
+                        variant="h5"
                         component="div"
-                        sx={{ flexGrow: 1 }}
+                        sx={{
+                            flexGrow: 1,
+                            fontStyle: 'bold',
+                            color: '#1976d2',
+                        }}
                     >
                         Enter your search here to learn about other planets.
                     </Typography>
@@ -134,23 +110,6 @@ export default function Search() {
                         onChange={handleInputChange}
                         onSubmit={(e) => e.preventDefault()}
                     />
-                    {/* <Autocomplete
-                    sx={{ minWidth: '56%' }}
-                    {...defaultProps}
-                    id="auto-complete"
-                    autoComplete
-                    // includeInputInList
-                    renderInput={(params) => (
-                        <TextField
-                            {...params}
-                            label="Enter your search here to learn about other planets"
-                            variant="standard"
-                            value={searchQuery}
-                            onKeyDown={handleInputKeyDown}
-                            onChange={handleInputChange}
-                        />
-                    )}
-                /> */}
                 </Box>
 
                 <Box
@@ -168,6 +127,18 @@ export default function Search() {
                 >
                     <section>
                         {isLoading && <Loading />}
+
+                        {data?.collection?.items.length === 0 && (
+                            <Alert severity="info">
+                                <AlertTitle>Info</AlertTitle>
+                                The result is empty. —{' '}
+                                <strong>
+                                    The search returned no results. Suggested
+                                    searches: Earth, Mars, Saturn, or other
+                                    planets.
+                                </strong>
+                            </Alert>
+                        )}
 
                         {data?.collection?.items.map((item, index) => {
                             return (
