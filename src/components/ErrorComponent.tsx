@@ -1,4 +1,4 @@
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import { Alert, AlertTitle } from '@mui/material';
 
 // Interface para as propriedades do componente Error
 // interface ErrorProps {
@@ -10,9 +10,11 @@ export default function Error() {
     // console.error('Error: ', errorMessage ? errorMessage : 'Error');
     return (
         <div>
-            <ErrorOutlineIcon />
-            {/* <h1>{errorMessage}</h1> */}
-            {/* {errorMessage && <p>{errorMessage}</p>} */}
+            <Alert severity="error">
+                <AlertTitle>Error</AlertTitle>
+                There was an error trying to get the results.{' '}
+                <strong>Please try again!</strong>
+            </Alert>
         </div>
     );
 }

@@ -5,10 +5,11 @@ import CardItem from './CardItem';
 import { Alert, AlertTitle, Box, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import Loading from './Loading';
+import ErrorComponent from './ErrorComponent';
 
 export default function Search() {
     const [searchQuery, setSearchQuery] = useState('saturn');
-    const { data, isLoading } = useSearch(searchQuery);
+    const { data, isLoading, isError } = useSearch(searchQuery);
     const baseUrl = import.meta.env.VITE_BASE_URL as string;
     const [inputValue, setInputValue] = useState('');
 
@@ -127,6 +128,7 @@ export default function Search() {
                 >
                     <section>
                         {isLoading && <Loading />}
+                        {isError && <ErrorComponent />}
 
                         {data?.collection?.items.length === 0 && (
                             <Alert severity="info">
